@@ -1,3 +1,5 @@
+# A Spring Boot, Angular Application
+
 # Description
 This projects allows a machine to host and expose a local directory to the local network. Every device within the network can list, navigate, download and upload files to the host machine.
 
