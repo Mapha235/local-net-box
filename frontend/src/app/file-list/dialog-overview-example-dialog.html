@@ -1,0 +1,34 @@
+<head>
+  <link rel="stylesheet" href="./dialog-overview-example-dialog.css" />
+</head>
+
+<h2 mat-dialog-title>Hi {{data.name}}</h2>
+<mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+    <input matInput [(ngModel)]="animal" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="animal()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>
+
+
+<h2> Upload File/Folder </h2>
+<mat-dialog-content>
+  <div class="dialog-card">
+    <div class="dropZone" appDragAndDrop flex="">
+      <input type="file" #fileDropRef id="fileDropRef" multiple/>
+      <img src="../../assets/file_upload_24dp_E8EAED.svg" alt="" />
+      <h3>Drag and drop file or folder here</h3>
+      <h3>or</h3>
+      <label #dropZoneLabel for="fileDropRef">Browse for file</label>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="animal()" cdkFocusInitial>Upload</button>
+</mat-dialog-actions>

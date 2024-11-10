@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-dark my-5">
+        <div class="card-body">
+          <h1 class="card-title text-center text-white py-3">{{ title }}</h1>
+          <h4 class="card-title text-center text-white py-3">{{ subtitle }}</h4>
+          <ul class="text-center list-inline py-3">
+            <li class="list-inline-item">
+              <a routerLink="/folder" class="btn btn-info"><mat-icon>home</mat-icon> </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+<button
+  mat-fab
+  color="success"
+  aria-label="Upload dialog button"
+  (click)="openUploadDialog()"
+>
+  <mat-icon>add</mat-icon>
+</button>
+
+<app-upload-progress
+  *ngIf="uploadInProgress"
+  (closeEvent)="uploadInProgress = false"
+>
+</app-upload-progress>

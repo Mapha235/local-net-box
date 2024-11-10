@@ -1,0 +1,71 @@
+.dialog-card {
+  display: flex;
+}
+
+h2 {
+  text-align: center;
+}
+
+.dropZone {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  border: dashed 1px #979979;
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
+  img {
+    width: 50px;
+    filter: brightness(0%);
+  }
+
+  input {
+    opacity: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+  label {
+    color: white;
+    width: 183px;
+    height: 44px;
+    border-radius: 21.5px;
+    background-color: lightblue;
+    padding: 8px 16px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #38424c;
+  }
+}
+
+.upload-list{
+  display: block;
+  margin-top: 0.5rem;
+  width: 100%;
+  height: 100%;
+  /* overflow-x:  hidden; */
+  overflow-y:  scroll;
+  white-space: nowrap;
+
+  .single-file{
+    padding: 0.5rem;
+    display: flex;
+    border: dashed 1px #979797;
+    background-color: #979979;
+  }
+}
+
+
+progress{
+    width: 90%;
+}
+

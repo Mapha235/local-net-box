@@ -1,0 +1,72 @@
+<mat-card class="file-upload-card" appearance="outlined">
+  <mat-card-actions class="file-upload-card-actions">
+    <mat-card-title class="file-upload-card-header" *ngIf="finishedUploading !== totalFiles">Uploading...</mat-card-title>
+    <mat-card-title class="file-upload-card-header" *ngIf="finishedUploading === totalFiles">Uploaded</mat-card-title>
+    <button
+      class="delete-btn"
+      mat-button
+      aria-label="Minimize button"
+      (click)="collapsed = !collapsed"
+    >
+      <mat-icon *ngIf="collapsed">expand_less</mat-icon>
+      <mat-icon *ngIf="!collapsed">expand_more</mat-icon>
+    </button>
+
+    <button class="close-btn" mat-button aria-label="Close button" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-actions>
+
+  <mat-card-content *ngIf="!collapsed">
+    <mat-card
+      class="single-file-card"
+      appearance="outlined"
+      *ngFor="let fileStatus of uploadProgress$ | async; let file of progress"
+    >
+      <mat-card-header>
+        <mat-icon class="checkmark-icon" *ngIf="fileStatus.progress === 100">check_circle</mat-icon>
+        <mat-card-title-group>
+          <mat-card-subtitle class="single-file-card-title">{{file.filename}}</mat-card-subtitle>
+          <mat-card-subtitle>{{ fileStatus.size }}</mat-card-subtitle>
+
+          <button class="delete-btn" mat-button aria-label="Delete file">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </mat-card-title-group>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="progress-bar-container">
+          <mat-progress-bar
+            class="file-progress-bar"
+            color="primary"
+            mode="determinate"
+            [value]="fileStatus.progress"
+            max="100"
+          ></mat-progress-bar>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+
+  <mat-card-header class="file-upload-card-header">
+    <mat-card-title-group>
+      <mat-card-subtitle>{{ finishedUploading }} / {{ totalFiles }}</mat-card-subtitle>
+      
+      <div>
+        {{progressBar}} %
+      </div>
+
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-footer>
+    <div>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="progressBar"
+        max="100"
+      ></mat-progress-bar>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,61 @@
+.file-folder-table {
+  width: 100%;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+  background-color: #ccc;
+}
+
+.row-is-clicked {
+  background-color: #ccc;
+}
+
+img {
+  filter: brightness(0%);
+}
+
+.action-btn:hover {
+  cursor: pointer;
+}
+
+.storageEntity:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  border-color: black;
+}
+
+.storageEntity{
+  overflow:auto;
+}
+
+#directory-bar {
+  width: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.directory-btn-root {
+  margin-right: 5px;
+}
+
+.mat-column-id {
+  width: 30px;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+/* .mat-column-size, */
+.mat-column-last-modfied,
+.mat-column-actions {
+  text-align: right;
+  justify-content: flex-end;
+  max-width: 10%;
+}

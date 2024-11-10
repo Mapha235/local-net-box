@@ -1,0 +1,81 @@
+<div>
+  <div id="directory-bar">
+    <button mat-flat-button disabled class="directory-btn-root">Path:</button>
+    <button
+      mat-stroked-button
+      class="directory-btn"
+      *ngFor="let dir of currentDir; index as i"
+      (click)="goTo(i)"
+    >
+      /{{ dir }}
+    </button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="file-folder-table">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let storageEntity; let i = index">
+        {{ i + 1 }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let storageEntity" class="storageEntity" (click)="goTo(storageEntity)">
+        <img
+          *ngIf="getType(storageEntity) === 'folder'"
+          src="../../assets/folder_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
+          alt=""
+        />
+        <img
+          *ngIf="getType(storageEntity) === 'file'"
+          src="../../assets/draft_24dp_000000_FILL0_wght400_GRAD0_opsz24.svg"
+          alt=""
+        />
+        <span class="storage-entity-name">{{ storageEntity.name }}</span>
+      </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef>Size</th>
+      <td mat-cell *matCellDef="let storageEntity">
+        <span *ngIf="getType(storageEntity) == 'file'">{{ format(storageEntity.size) }}</span>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="last-modified">
+      <th mat-header-cell *matHeaderCellDef>Last Modified</th>
+      <td mat-cell *matCellDef="let storageEntity">
+        {{ storageEntity.lastModifiedDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let storageEntity">
+        <mat-icon
+          class="action-btn"
+          aria-hidden="false"
+          aria-label="Download button"
+          fontIcon="download"
+          (click)="download(storageEntity)"
+        ></mat-icon>
+        <mat-icon
+          class="action-btn"
+          aria-hidden="false"
+          aria-label="Delete button"
+          fontIcon="delete"
+        ></mat-icon></td
+    ></ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>

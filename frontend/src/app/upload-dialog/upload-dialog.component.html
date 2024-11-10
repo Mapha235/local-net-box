@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Upload File/Folder</h2>
+<mat-dialog-content>
+  <div class="dialog-card">
+    <div
+      class="dropZone"
+      appDragAndDrop
+      flex=""
+      (fileDropped)="onFileDropped($event)"
+    >
+      <input
+        type="file"
+        name="file"
+        #fileDropRef
+        id="fileDropRef"
+        multiple
+        (change)="fileBrowseHandler($event)"
+      />
+      <img src="../../assets/file_upload_24dp_E8EAED.svg" alt="" />
+      <h3>Drag and drop file or folder here</h3>
+      <h3>or</h3>
+      <label #dropZoneLabel for="fileDropRef">Browse for file</label>
+    </div>
+  </div>
+
+  <h6>{{ filesCount }} files</h6>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="close(false)">Cancel</button>
+  <button mat-button (click)="uploadFiles()">Upload</button>
+</mat-dialog-actions>

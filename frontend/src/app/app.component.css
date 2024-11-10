@@ -1,0 +1,20 @@
+button {
+    border-radius: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 40px;
+    /* background-color: aliceblue; */
+    z-index: 1;
+}
+
+app-upload-progress{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    z-index: 1;
+}
+

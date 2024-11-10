@@ -1,0 +1,29 @@
+.file-upload-card {
+  border-color: black;
+  max-width: 400px;
+  max-height: 50vw;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.file-upload-card-actions {
+  background-color: #ccc;
+}
+
+.single-file-card-title {
+  color: black;
+  align-items: end;
+}
+
+.checkmark-icon {
+  margin-right: 10px;
+}
+
+.close-btn {
+  float: right;
+}
+
+.delete-btn {
+  margin-left: auto;
+  
+}
