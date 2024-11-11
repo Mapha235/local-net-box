@@ -8,6 +8,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +67,9 @@ public class FileServiceImpl implements FileService {
                 .collect(Collectors.toList());
 
         for (File f : files) {
-            output.add(FileModification.convertToFileEntity(f));
+            FileEntity file = FileModification.convertToFileEntity(f);
+            file.setParentDir(dirPath);
+            output.add(file);
         }
         return output;
     }
@@ -229,5 +232,4 @@ public class FileServiceImpl implements FileService {
         System.out.println("Finished collecting files for download");
         return resource;
     }
-
 }

@@ -14,10 +14,11 @@ import lombok.Setter;
 public class FolderEntity extends StorageEntity {
     private int maxDepth;
 
-    public FolderEntity(String name, String dir, String lastModifiedDate) {
+    public FolderEntity(String name, String parentDir, String lastModifiedDate) {
         this.name = name;
-        this.parentDir = dir;
+        this.parentDir = parentDir;
         this.lastModifiedDate = lastModifiedDate;
         this.maxDepth = 0;
+        this.hashCode = this.getHashCode();
     }
 }
