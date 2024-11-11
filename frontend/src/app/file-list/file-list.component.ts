@@ -10,6 +10,7 @@ import { FileEntity } from '../model/file';
 import { Folder } from '../model/folder';
 import { FileService } from '../service/file.service';
 import { SharedService } from '../service/shared/shared.service';
+import { NotificationService } from '../service/notification/notification.service';
 
 @Component({
   selector: 'file-list.component',
@@ -38,6 +39,7 @@ export class FileListComponent implements OnInit {
   constructor(
     private fileService: FileService,
     private sharedService: SharedService,
+    private notificationService: NotificationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -62,6 +64,8 @@ export class FileListComponent implements OnInit {
         // GET request to the server with the given query parameters
         return this.fileService.findAll$(param).pipe(
           catchError((err) => {
+            console.log(err)
+            this.notificationService.showErrorSnackbar(`Error ${err.status}: Directory does not exist`);
             this.currentDir.pop();
             this.router.navigate(['/folder'], {
               queryParams: {dir: this.currentDir.join('/')}
