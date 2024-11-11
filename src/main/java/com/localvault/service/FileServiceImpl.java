@@ -57,7 +57,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<FileEntity> fetchFileList(String dirPath) throws Exception {
         List<FileEntity> output = new ArrayList<>();
-        System.out.println("File Fetch: " + dirPath);
         // Reading files in the directory
         Path path = this.getPath(dirPath);
 
@@ -75,7 +74,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<FolderEntity> fetchFolderList(String dirPath) throws Exception {
         Path directory = this.getPath(dirPath);
-        System.out.println("Folder fetch: " + directory);
 
         File[] directories = directory.toFile().listFiles(new FileFilter() {
             @Override
