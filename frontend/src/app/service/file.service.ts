@@ -61,11 +61,4 @@ export class FileService {
 
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
-
-  // prepareParams(params: ParamMap): HttpParams {
-  //   let param: any;
-  //   param = params.get('dir') == null ? '' : params.get('dir');
-  //   let httpParams = new HttpParams().set('dir', param).set('files', params.get('files'));
-  //   return httpParams;
-  // }
 }

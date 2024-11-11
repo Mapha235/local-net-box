@@ -89,16 +89,6 @@ public class FileModification {
         return null;
     }
 
-    /**
-     * Traverses the file tree using DFS to determine the maximum depth.
-     * 
-     * @param folder
-     * @return
-     */
-    public static int folderDepth(FolderEntity folder) {
-        return 0;
-    }
-
     public static byte[] getFileContent(String filePath) {
         Path fullPath = Paths.get(filePath);
         try {

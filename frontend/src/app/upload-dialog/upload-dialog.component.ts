@@ -53,7 +53,6 @@ export class UploadDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.uploadProgress = this.uploadService.uploadProgress$;
   }
 
   ngOnDestroy(): void {
