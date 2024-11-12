@@ -68,3 +68,7 @@ progress{
     width: 90%;
 }
 
+mat-dialog-actions{
+  justify-content: right;
+  align-items: right;
+}

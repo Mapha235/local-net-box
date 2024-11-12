@@ -55,7 +55,7 @@
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let storageEntity">
+      <td mat-cell *matCellDef="let storageEntity; index as i">
         <mat-icon
           class="action-btn"
           aria-hidden="false"
@@ -68,6 +68,7 @@
           aria-hidden="false"
           aria-label="Delete button"
           fontIcon="delete"
+          (click)="delete(storageEntity, i)"
         ></mat-icon></td
     ></ng-container>
 

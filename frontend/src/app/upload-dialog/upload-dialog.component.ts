@@ -43,17 +43,12 @@ export class UploadDialogComponent implements OnInit {
   uploadProgress: Observable<FileStatus[]>;
   filesCount: number = 0;
 
-  close(uploading: boolean): void {
-    this.dialogRef.close(uploading);
-  }
-
   constructor(
     private uploadService: UploadService,
     private sharedService: SharedService
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     console.log('Closed dialog');
@@ -66,6 +61,9 @@ export class UploadDialogComponent implements OnInit {
     this.close(this.files.length === 0 ? false : true);
   }
 
+  close(uploading: boolean): void {
+    this.dialogRef.close(uploading);
+  }
   /**
    * on file drop handler
    */

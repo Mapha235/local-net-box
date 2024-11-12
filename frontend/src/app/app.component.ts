@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constants } from './config/constants';
@@ -14,9 +14,9 @@ export class AppComponent {
   title = Constants.TitleOfSite;
   subtitle = Constants.SubtitleOfSite;
   uploadInProgress: boolean = false;
+  readonly dialog = inject(MatDialog);
 
   constructor(
-    private dialog: MatDialog,
     private fileService: FileService,
     private router: Router
   ) {}

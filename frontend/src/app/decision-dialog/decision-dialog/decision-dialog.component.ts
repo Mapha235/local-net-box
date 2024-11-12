@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
@@ -12,21 +11,15 @@ import {
 @Component({
   selector: 'app-decision-dialog',
   standalone: true,
-  imports: [
-    MatDialogActions,
-    MatDialogContent,
-    MatButtonModule,
-    MatDialogClose,
-  ],
+  imports: [MatDialogActions, MatDialogContent, MatButtonModule],
   templateUrl: './decision-dialog.component.html',
   styleUrl: './decision-dialog.component.css',
 })
 export class DecisionDialogComponent {
   message: string;
-  readonly dialogRef = inject(MatDialogRef<DecisionDialogComponent>);
   readonly data = inject(MAT_DIALOG_DATA);
 
-  constructor() {
+  constructor(private dialogRef: MatDialogRef<DecisionDialogComponent>) {
     this.message = this.data.data['message'];
   }
 
