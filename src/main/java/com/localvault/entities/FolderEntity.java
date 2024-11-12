@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -20,5 +21,10 @@ public class FolderEntity extends StorageEntity {
         this.lastModifiedDate = lastModifiedDate;
         this.maxDepth = 0;
         this.hashCode = this.getHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "FolderEntity(" + super.toString();
     }
 }

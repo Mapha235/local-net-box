@@ -20,6 +20,7 @@ public class FileEntity extends StorageEntity {
         this.name = name;
         this.parentDir = parentDir;
         this.size = 0;
+        this.hashCode = this.getHashCode();
     }
 
     public FileEntity(String name, String parentDir, long size, String lastModifiedDate) {
@@ -27,10 +28,11 @@ public class FileEntity extends StorageEntity {
         this.parentDir = parentDir;
         this.size = size;
         this.lastModifiedDate = lastModifiedDate;
+        this.hashCode = this.getHashCode();
     }
 
     @Override
     public String toString() {
-        return this.size + super.toString();
+        return "FileEntity(" + this.size + super.toString();
     }
 }
