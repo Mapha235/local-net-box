@@ -58,10 +58,10 @@ public class FileModification {
     public static FileEntity convertToFileEntity(File file) {
         try {
             FileEntity fileEntity = new FileEntity(
-                    file.getName(),
-                    Objects.toString(file.getParent(), "").replace('\\', '/'),
-                    file.length(),
-                    FileModification.formatDateTime(Files.getLastModifiedTime(file.toPath())));
+                file.getName(),
+                Objects.toString(file.getParent(), "").replace('\\', '/'),
+                file.length(),
+                FileModification.formatDateTime(Files.getLastModifiedTime(file.toPath())));
             return fileEntity;
         } catch (IOException e) {
             System.out.println("Could not convert java.io.File object to FileEntity object. Reason: " + e.getMessage());

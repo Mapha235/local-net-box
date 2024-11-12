@@ -92,7 +92,8 @@ public class FileServiceImpl implements FileService {
             FolderEntity folderEntity = new FolderEntity(folder.getName(), dirPath,
                     FileModification.formatDateTime(Files.getLastModifiedTime(f)));
 
-            folderEntities.add(this.folderRepository.save(folderEntity));
+            // folderEntities.add(this.folderRepository.save(folderEntity));
+            folderEntities.add(folderEntity);
         }
         return folderEntities;
     }
@@ -231,5 +232,17 @@ public class FileServiceImpl implements FileService {
         }
         System.out.println("Finished collecting files for download");
         return resource;
+    }
+
+    @Override
+    public boolean deleteResource(StorageEntity storageEntity) throws Exception {
+        String name = storageEntity.getName();
+        String dir = storageEntity.getAbsolutePath();
+        System.out.println("Deleting: " + this.root + '/' + dir);
+        System.out.println("to " + Constants.RECYCLE_BIN);
+
+        Files.move(new File(this.root + '/' + dir).toPath(), new File(Constants.RECYCLE_BIN + '/' + name).toPath(),
+                StandardCopyOption.REPLACE_EXISTING);
+        return true;
     }
 }

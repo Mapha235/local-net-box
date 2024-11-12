@@ -12,12 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -57,7 +58,6 @@ public class FileController {
     }
 
     @GetMapping("/download")
-    @ResponseBody
     public ResponseEntity<Resource> getResource(@RequestParam(required = false) String dir) {
         try {
             System.out.println("download request received for: " + dir);
@@ -107,5 +107,19 @@ public class FileController {
         responseHeaders.set("X-Expected-Chunk-Id", Long.toString(expectedChunkId));
 
         return new ResponseEntity<>(map, responseHeaders, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete")
+    public <T extends StorageEntity> ResponseEntity<String> handleDeleteRequest(@RequestBody T payload,
+            @RequestParam(required = false) String dir) {
+        try {
+            System.out.println("delete request received: " + payload);
+            System.out.println("delete request received: " + payload.getClass());
+
+            this.fileService.deleteResource(payload);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return ResponseEntity.ok().build();
     }
 }

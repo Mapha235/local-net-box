@@ -4,6 +4,7 @@ export class FileEntity {
   size: number;
   lastModifiedDate: string = '';
   parentDir: string = '';
+  type: string = 'file';
 
   setParentDir(parentDir: string) {
     this.parentDir = parentDir;

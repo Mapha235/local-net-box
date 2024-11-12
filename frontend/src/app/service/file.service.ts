@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Constants } from '../config/constants';
 import { environment } from '../../environments/environment';
 import { ParamMap } from '@angular/router';
+import { FileEntity } from '../model/file';
+import { Folder } from '../model/folder';
 
 /**
  * Service to fetch and post data to the server
@@ -42,6 +44,15 @@ export class FileService {
       observe: 'response',
       params: pathParam,
       responseType: 'blob',
+    });
+  }
+
+  public deleteFile$(storageEntity: FileEntity | Folder) {
+    const fullPath = storageEntity.getAbsolutePath();
+    return this.http.delete(this.serverUrl + '/delete', {
+      observe: 'response',
+      body: storageEntity,
+      params: { dir: fullPath },
     });
   }
 

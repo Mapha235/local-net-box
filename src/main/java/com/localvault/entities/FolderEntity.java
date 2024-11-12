@@ -1,12 +1,14 @@
 package com.localvault.entities;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
+@JsonTypeName("folder")
 @Getter
 @Setter
 @Entity

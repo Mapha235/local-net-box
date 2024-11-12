@@ -1,5 +1,7 @@
 package com.localvault.entities;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -7,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@JsonTypeName("file")
 @Getter
 @Setter
 @Entity
@@ -33,6 +36,6 @@ public class FileEntity extends StorageEntity {
 
     @Override
     public String toString() {
-        return "FileEntity(" + this.size + super.toString();
+        return "FileEntity(" + this.size + ", " + super.toString();
     }
 }

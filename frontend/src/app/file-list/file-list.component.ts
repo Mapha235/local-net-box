@@ -3,7 +3,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, forkJoin, mergeMap, of, takeWhile } from 'rxjs';
 import { FileEntity } from '../model/file';
@@ -33,7 +33,7 @@ export class FileListComponent implements OnInit {
   files: FileEntity[] = [];
 
   // files and folders
-  dataSource: any[];
+  dataSource;
   currentDir: String[] = [];
 
   constructor(
@@ -64,11 +64,13 @@ export class FileListComponent implements OnInit {
         // GET request to the server with the given query parameters
         return this.fileService.findAll$(param).pipe(
           catchError((err) => {
-            console.log(err)
-            this.notificationService.showErrorSnackbar(`Error ${err.status}: Directory does not exist`);
+            console.log(err);
+            this.notificationService.showErrorSnackbar(
+              `Error ${err.status}: Directory does not exist`
+            );
             this.currentDir.pop();
             this.router.navigate(['/folder'], {
-              queryParams: {dir: this.currentDir.join('/')}
+              queryParams: { dir: this.currentDir.join('/') },
             });
             return of({ folders: [], files: [] });
           })
@@ -89,8 +91,13 @@ export class FileListComponent implements OnInit {
           Object.assign(fileObj, file);
           return fileObj;
         });
-        this.dataSource = [...this.folders, ...this.files];
-      }
+        // this.dataSource = [...this.folders, ...this.files];
+        this.dataSource = new MatTableDataSource([
+          ...this.folders,
+          ...this.files,
+        ]);
+        console.log(this.dataSource);
+      },
     });
   }
 
@@ -132,8 +139,9 @@ export class FileListComponent implements OnInit {
     let downloadInProgress: boolean = true;
     let fileName = storageEntity.name;
 
-    if (storageEntity instanceof Folder) fileName += '.zip';
-    else if (!(storageEntity instanceof FileEntity)) return;
+    const type = this.getType(storageEntity);
+    if (type === 'folder') fileName += '.zip';
+    else if (!(type === 'file')) return;
 
     this.fileService
       .downloadFile$(storageEntity.getAbsolutePath())
@@ -151,8 +159,20 @@ export class FileListComponent implements OnInit {
         complete: () => {
           downloadInProgress = false;
           console.log('Download completed');
-        },
+        }
       });
+  }
+
+  async delete(storageEntity, i) {
+    const userDecision: boolean =
+      await this.notificationService.openDecisionDialog(storageEntity.name);
+    if (userDecision) {
+      console.log('User decision', userDecision);
+      this.fileService
+        .deleteFile$(storageEntity)
+        .subscribe((data) => console.log(data));
+      }
+      // window.location.reload();
   }
 
   format(fileSize: number) {

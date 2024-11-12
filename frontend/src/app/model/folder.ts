@@ -5,6 +5,8 @@ export class Folder {
   lastModifiedDate: string = '';
   parentDir: string = '';
   maxDepth: number = 0;
+  hashCode: number;
+  type: string = 'folder';
 
   setParentDir(parentDir: string) {
     this.parentDir = parentDir;

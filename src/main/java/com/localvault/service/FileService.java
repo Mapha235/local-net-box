@@ -60,4 +60,12 @@ public interface FileService {
      * @return requested files resource
      */
     public Resource getResource(String dir) throws IOException;
+
+    /**
+     * Deletes the requested resource.
+     * 
+     * @param storageEntity Storage Entity to be moved to the recycle bin
+     * @return true if deleting the resource was successful
+     */
+    public boolean deleteResource(StorageEntity storageEntity) throws Exception;
 }
