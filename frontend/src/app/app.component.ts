@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Constants } from './config/constants';
-import { FileService } from './service/file.service';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 
 @Component({
@@ -17,9 +16,10 @@ export class AppComponent {
   readonly dialog = inject(MatDialog);
 
   constructor(
-    private fileService: FileService,
-    private router: Router
-  ) {}
+    private titleService: Title,
+  ) {
+    this.titleService.setTitle(this.title);
+  }
 
   public openUploadDialog() {
     this.uploadInProgress = false;
@@ -29,7 +29,6 @@ export class AppComponent {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      id: 1,
       title: 'upload',
       data: {
         bool: this.uploadInProgress,
