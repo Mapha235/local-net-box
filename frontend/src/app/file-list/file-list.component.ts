@@ -27,13 +27,13 @@ export class FileListComponent implements OnInit {
     'last-modified',
     'actions',
   ];
-  clickedRows = new Set<Folder>();
+  clickedRows = new Set<Folder | FileEntity>();
 
   folders: Folder[] = [];
   files: FileEntity[] = [];
 
   // files and folders
-  dataSource;
+  dataSource: MatTableDataSource<Folder | FileEntity>;
   currentDir: String[] = [];
 
   constructor(
@@ -96,7 +96,7 @@ export class FileListComponent implements OnInit {
           ...this.folders,
           ...this.files,
         ]);
-        console.log(this.dataSource);
+        console.log(this.dataSource.data);
       },
     });
   }
@@ -159,20 +159,28 @@ export class FileListComponent implements OnInit {
         complete: () => {
           downloadInProgress = false;
           console.log('Download completed');
-        }
+        },
       });
   }
 
   async delete(storageEntity, i) {
+    const name = storageEntity.name;
     const userDecision: boolean =
-      await this.notificationService.openDecisionDialog(storageEntity.name);
+      await this.notificationService.openDecisionDialog(name);
     if (userDecision) {
-      console.log('User decision', userDecision);
-      this.fileService
-        .deleteFile$(storageEntity)
-        .subscribe((data) => console.log(data));
-      }
-      // window.location.reload();
+      this.fileService.deleteFile$(storageEntity).subscribe({
+        error: (err) => {
+          this.notificationService.showErrorSnackbar(
+            `Could not delete ${name}: ${err}`
+          );
+        },
+        complete: () => {
+          this.notificationService.showErrorSnackbar(
+            `Moved [${name}] to recycle bin.`
+          );
+        },
+      });
+    }
   }
 
   format(fileSize: number) {
